@@ -1,0 +1,17 @@
+{
+  "name": "api-creditos",
+  "version": "1.0.0",
+  "description": "Backend para gestión de créditos y clientes",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "TuNombre",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mysql2": "^3.6.0"
+  }
+}
