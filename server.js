@@ -6,7 +6,14 @@ require('dotenv').config();
 const app = express();
 app.use(cors());
 app.use(express.json());
+const cors = require('cors');
 
+// Configuración de CORS
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type']
+}));
 const dbConfig = {
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,
