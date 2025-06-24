@@ -13,6 +13,7 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type']
 }));
+
 const dbConfig = {
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,
@@ -21,6 +22,25 @@ const dbConfig = {
   database: process.env.DB_NAME
 };
 
+// 🔹 NUEVA RUTA: Buscar cliente por cédula
+app.get('/api/clientes', async (req, res) => {
+  const { cedula } = req.query;
+  if (!cedula) return res.status(400).json({ error: 'Cédula requerida' });
+
+  try {
+    const conn = await mysql.createConnection(dbConfig);
+    const [rows] = await conn.execute(`SELECT * FROM clientes WHERE cedula = ?`, [cedula]);
+    await conn.end();
+
+    if (rows.length === 0) {
+      return res.status(404).json({ error: 'Cliente no encontrado' });
+    }
+
+    res.json(rows[0]);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 app.post('/api/clientes', async (req, res) => {
   try {
