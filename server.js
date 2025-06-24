@@ -22,7 +22,6 @@ const dbConfig = {
   database: process.env.DB_NAME
 };
 
-// 🔹 NUEVA RUTA: Buscar cliente por cédula
 app.get('/api/clientes', async (req, res) => {
   const { cedula } = req.query;
   if (!cedula) return res.status(400).json({ error: 'Cédula requerida' });
